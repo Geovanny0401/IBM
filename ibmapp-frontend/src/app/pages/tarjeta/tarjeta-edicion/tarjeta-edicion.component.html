@@ -1,0 +1,99 @@
+<mat-card>Ingrese las Tarjetas para cada Cliente</mat-card>
+
+<form class="example-container" [formGroup]="form" #frmTarjeta="ngForm" (ngSubmit)="operar()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="id">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input type="text" placeholder="Cliente" matInput [matAutocomplete]="autoCliente" [formControl]="myControlCliente" formControlName="cliente">
+        <mat-autocomplete #autoCliente="matAutocomplete" [displayWith]="displayFn" (optionSelected)="seleccionarCliente($event)">
+            <mat-option *ngFor="let p of filteredOptions | async" [value]="p">
+                {{ p.nombre }}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="NumTarjeta" required formControlName="numtarjeta" mask="9999-9999-9999-9999">
+    </mat-form-field>
+
+    <!--
+    <igx-input-group>
+        <label igxLabel for="socialSecurityNumber">Numero Tarjeta</label>
+        <input igxInput #ssn formControlName="numtarjeta" name="numtarjeta" type="text" [igxMask]="'####-####-####-####'" [(ngModel)]="tarjeta.numtarjeta" (blur)="validateSSN(ssn)" />
+    </igx-input-group>
+-->
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="TipTarjeta" required formControlName="tiptarjeta">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="CCV" required formControlName="ccv">
+    </mat-form-field>
+
+
+
+
+
+    <mat-form-field>
+        <input matInput placeholder="Monto" [(ngModel)]="monto" formControlName="monto">
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Descripcion" [(ngModel)]="descripcion" formControlName="descripcion"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Fecha" formControlName="fecha">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="button" (click)="agregar()">Agregar Detalle</button>
+
+    <mat-toolbar *ngIf="detalleConsumo.length===0">No hay consumo agregados</mat-toolbar>
+
+    <mat-list role="list" *ngFor="let d of detalleConsumo; let i=index">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{d.monto}}
+                    </mat-panel-title>
+                    <mat-panel-title>
+                        {{d.fecha}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Ver Descricpion
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field>
+                    <textarea matInput placeholder="Descripcion" value="{{d.descripcion}}"></textarea>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea matInput placeholder="Fecha" value="{{d.fecha}}"></textarea>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="warn" type="button" (click)="removerConsumo(i)">Remover</button>
+
+            </mat-expansion-panel>
+
+        </mat-accordion>
+
+    </mat-list>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmTarjeta.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Aceptar</span>
+  </button>
+    <button mat-raised-button color="accent" routerLink='/tarjeta' type="button">
+    <mat-icon>close</mat-icon>
+    <span>Cancelar</span>
+  </button>
+</form>

@@ -1,0 +1,35 @@
+<mat-card>Ingrese los datos del Cliente</mat-card>
+
+<form class="example-container" [formGroup]="form" #frmCliente="ngForm" (ngSubmit)="operar()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="id">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nombres" required formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ciudad" required formControlName="ciudad">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Direccion" required formControlName="direccion">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Telefono" required formControlName="telefono">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmCliente.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Aceptar</span>
+  </button>
+    <button mat-raised-button color="accent" routerLink='/cliente' type="button">
+    <mat-icon>close</mat-icon>
+    <span>Cancelar</span>
+  </button>
+</form>

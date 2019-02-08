@@ -1,0 +1,35 @@
+//POST CLIENTE
+
+{
+    "nombre": "Ketty",
+    "direccion": "Cl 16C",
+    "ciudad": "La Paz",
+    "telefono": 31045678
+}
+
+
+
+//POST TARJETA
+
+
+{
+    "numtarjeta": 88776655,
+    "ccv": "200",
+    "tiptarjeta": "CREDITO",
+    "cliente": {
+        "idCliente": 1
+    },
+    "detalleConsumo": [{
+        "fecha": "05/02/2019",
+        "descripcion": "COMPRA MAC",
+        "monto": 1220000
+    }]
+}
+
+
+//POST ASESORES
+
+{
+    "nombre": "tatiana",
+    "especialidad": "cajero"
+}
